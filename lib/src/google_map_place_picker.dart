@@ -282,22 +282,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
     }
   }
 
-  Widget _buildFloatingCard() {
-    return Selector<PlaceProvider, Tuple4<PickResult?, SearchingState, bool, PinState>>(
-      selector: (_, provider) => Tuple4(provider.selectedPlace, provider.placeSearchingState, provider.isSearchBarFocused, provider.pinState),
-      builder: (context, data, __) {
-        if ((data.item1 == null && data.item2 == SearchingState.Idle) || data.item3 == true || data.item4 == PinState.Dragging && this.hidePlaceDetailsWhenDraggingPin!) {
-          return Container();
-        } else {
-          if (selectedPlaceWidgetBuilder == null) {
-            return _defaultPlaceWidgetBuilder(context, data.item1, data.item2);
-          } else {
-            return Builder(builder: (builderContext) => selectedPlaceWidgetBuilder!(builderContext, data.item1, data.item2, data.item3));
-          }
-        }
-      },
-    );
-  }
+_buildFloatingCard
 
   Widget _defaultPlaceWidgetBuilder(BuildContext context, PickResult? data, SearchingState state) {
     return FloatingCard(
